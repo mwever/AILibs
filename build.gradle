@@ -29,7 +29,7 @@ allprojects {
 	//Other
 	apply plugin: "maven"
 	apply plugin: "jacoco"
-	//apply plugin: "signing"
+	apply plugin: "signing"
 
 	//Nebula
 	apply plugin: 'nebula.project'
@@ -42,11 +42,11 @@ allprojects {
 
 	//Project properties
 	project.group = 'ai.libs'
-	project.version = '0.1.4'
+	project.version = '0.1.5'
 	
 	ext {
-	    ossrhUsername = hasProperty('ossrhUsername') ? ossrhUsername : System.getenv("ossrhUsername")
-	    ossrhPassword = hasProperty('ossrhPassword') ? ossrhPassword : System.getenv("ossrhPassword")
+	    ossrhUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv("ossrhUsername")
+	    ossrhPassword = project.hasProperty('ossrhPassword') ? ossrhPassword : System.getenv("ossrhPassword")
 	}
 
 	
@@ -173,11 +173,11 @@ allprojects {
 //		failOnError = true
     	}
 	
+	signing {
+		sign configurations.archives
+	}
 }
 
-//signing {
-//	sign configurations.archives
-//}
 
 
 dependencies{
